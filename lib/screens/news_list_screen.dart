@@ -9,11 +9,13 @@ class NewsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Flutter News App')),
+      appBar: AppBar(title: Text('Flutter News App'),
+          backgroundColor: Colors.grey[800]),
+      backgroundColor: Colors.grey[900],
       body: BlocBuilder<NewsBloc, NewsState>(
         builder: (context, state) {
           if (state is NewsLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator(color: Colors.pinkAccent,));
           } else if (state is NewsLoaded) {
             return ListView.builder(
               itemCount: state.articles.length,

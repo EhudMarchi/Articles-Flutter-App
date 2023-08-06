@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'generalServices.dart';
 import 'model/article.dart';
 
 class ArticleCard extends StatelessWidget {
@@ -13,19 +14,13 @@ class ArticleCard extends StatelessWidget {
 
   final Article article;
 
-  String formatDate(String dateString) {
-    final DateTime date = DateTime.parse(dateString);
-    final DateFormat formatter = DateFormat('MMM dd, yyyy, h:mm a');
-    return formatter.format(date);
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: Colors.blue[100],
+        color: Colors.grey[800],
         child: Column(
           children: [
             if (article.urlToImage != null)
@@ -37,39 +32,39 @@ class ArticleCard extends StatelessWidget {
                   child: Image.network(
                     article.urlToImage,
                     width: double.infinity,
-                    height: 150,
+                    height: 120,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
             Text(
               article.source,
-              style: TextStyle(
+              style: const TextStyle(
                 fontStyle: FontStyle.italic,
-                color: Colors.black38,
+                color: Colors.white54,
               ),
             ),
             ListTile(
               title: Text(
                 article.title,
-                style: TextStyle(
-                  color: Colors.blue,
+                style: const TextStyle(
+                  color: Colors.pinkAccent,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
                 article.description,
-                style: TextStyle(
-                  color: Colors.black87,
+                style: const TextStyle(
+                  color: Colors.white,
                 ),
               ),
             ),
-            SizedBox(height: 12,),
+            const SizedBox(height: 12,),
             Text(
               'Published at: ${formatDate(article.publishedAt)}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontStyle: FontStyle.italic,
-                color: Colors.black38,
+                color: Colors.white54,
               ),
             ),
           ],
