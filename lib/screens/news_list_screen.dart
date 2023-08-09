@@ -28,7 +28,22 @@ class NewsListScreen extends StatelessWidget {
               },
             );
           } else if (state is NewsError) {
-            return Center(child: Text(state.error));
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/error_image.png',height: 200, color: Colors.pinkAccent), // Replace with your error image asset
+                  const SizedBox(height: 20),
+                  Text(
+                    state.error,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+            );
           } else {
             return Center(child: Text('No data'));
           }

@@ -1,7 +1,5 @@
 import 'package:articles/screens/article_details_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import 'generalServices.dart';
 import 'model/article.dart';
@@ -32,7 +30,7 @@ class ArticleCard extends StatelessWidget {
                   child: Image.network(
                     article.urlToImage,
                     width: double.infinity,
-                    height: 120,
+                    height: 160,
                     fit: BoxFit.cover,
                   ),
                 ),
