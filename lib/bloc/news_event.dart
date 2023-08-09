@@ -12,7 +12,7 @@ class FetchNews extends NewsEvent {}
 class SearchNews extends NewsEvent {
   final String searchTerm;
 
-  SearchNews(this.searchTerm);
+  const SearchNews(this.searchTerm);
 
   @override
   List<Object> get props => [searchTerm];

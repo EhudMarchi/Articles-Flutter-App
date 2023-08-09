@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../article_card.dart';
 import '../bloc/news_bloc.dart';
+import '../bloc/news_event.dart';
 import '../bloc/news_state.dart';
 
 class NewsListScreen extends StatelessWidget {
@@ -17,15 +18,40 @@ class NewsListScreen extends StatelessWidget {
           if (state is NewsLoading) {
             return const Center(child: CircularProgressIndicator(color: Colors.pinkAccent,));
           } else if (state is NewsLoaded) {
-            return ListView.builder(
-              itemCount: state.articles.length,
-              itemBuilder: (context, index) {
-                final article = state.articles[index];
-                return Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: ArticleCard(article: article),
-                );
-              },
+            return Column(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: TextField(
+                    onChanged: (query) {
+                      if(query.isNotEmpty) {
+                        final newsBloc = BlocProvider.of<NewsBloc>(context);
+                        newsBloc.add(SearchNews(query));
+                      }
+                    },
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      hintStyle: TextStyle(color: Colors.white54),
+                      hintText: 'Search articles...',
+
+                      prefixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 9,
+                  child: ListView.builder(
+                    itemCount: state.articles.length,
+                    itemBuilder: (context, index) {
+                      final article = state.articles[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: ArticleCard(article: article),
+                      );
+                    },
+                  ),
+                ),
+              ],
             );
           } else if (state is NewsError) {
             return Center(

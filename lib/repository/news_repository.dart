@@ -25,17 +25,8 @@ class NewsRepository {
     final response = await http.get(Uri.parse('$apiUrl&q=$searchTerm&apiKey=$apiKey'));
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
-      final List<Article> articles = (jsonData['articles'] as List)
-          .map((articleJson) => Article(
-        title: articleJson['title'],
-        description: articleJson['description'],
-        url: articleJson['url'],
-        urlToImage: articleJson['urlToImage'],
-        content: articleJson['content'],
-        publishedAt: articleJson['publishedAt'],
-        source: articleJson['source']['name'],
-      ))
-          .toList();
+      final List<dynamic> articlesJson = jsonData['articles'];
+      final List<Article> articles = articlesJson.map((articleJson) => Article.fromJson(articleJson)).toList();
       return articles;
     } else {
       throw Exception('Failed to search news');
