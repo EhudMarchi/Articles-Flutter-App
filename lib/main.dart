@@ -18,7 +18,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter News App',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: BlocProvider(
-        create: (context) => NewsBloc(newsRepository: newsRepository)..add(FetchNews()),
+        create: (context) => NewsBloc(
+            newsRepository: newsRepository)
+          ..add(FetchNews()),
         child: NewsListScreen(),
       ),
     );

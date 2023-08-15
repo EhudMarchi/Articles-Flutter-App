@@ -23,7 +23,7 @@ class NewsListScreen extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: TextField(
-                    onChanged: (query) {
+                    onSubmitted: (query) {
                       if(query.isNotEmpty) {
                         final newsBloc = BlocProvider.of<NewsBloc>(context);
                         newsBloc.add(SearchNews(query));
